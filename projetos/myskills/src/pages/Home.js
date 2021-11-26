@@ -32,13 +32,16 @@ export function Home() {
 				onChangeText={setNewSkill}
 			/>
 
+			 // ação do add skill
 			<Button onPress={handleAddNewSkill} />
 
+			// campo das skills
 			<Text style={[styles.title, { marginVertical: 50 }]}>
 				My skills
 			</Text>
 
 			{
+				// mostra a skill salva
 				mySkills.map(skill => (
 					<SkillCard skill={skill}/>
 				))
@@ -65,7 +68,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#1F1e25',
 		color: '#fff',
 		fontSize: 18,
-		padding: Platform.OS === 'ios' ? 15 : 10,
+		padding: Platform.OS === 'ios' ? 15 : 10, // faz a adapitação caso seja ios ou android
 		marginTop: 30,
 		borderRadius: 9
 	}
