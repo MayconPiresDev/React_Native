@@ -32,10 +32,10 @@ export function Home() {
 				onChangeText={setNewSkill}
 			/>
 
-			 // ação do add skill
+			 {/* ação do add skill */}
 			<Button onPress={handleAddNewSkill} />
 
-			// campo das skills
+			{/* campo das skills */}
 			<Text style={[styles.title, { marginVertical: 50 }]}>
 				My skills
 			</Text>
