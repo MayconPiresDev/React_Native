@@ -4,7 +4,8 @@ import {
 	Text,
 	StyleSheet,
 	TextInput,
-	Platform
+	Platform,
+	FlatList
 } from 'react-native';
 import { Button } from '../components/Button';
 import { SkillCard } from '../components/SkillCard';
@@ -32,20 +33,22 @@ export function Home() {
 				onChangeText={setNewSkill}
 			/>
 
-			 {/* ação do add skill */}
+			 {/* add skill */}
 			<Button onPress={handleAddNewSkill} />
 
-			{/* campo das skills */}
+			{/* space of skils */}
 			<Text style={[styles.title, { marginVertical: 50 }]}>
 				My skills
 			</Text>
 
-			{
-				// mostra a skill salva
-				mySkills.map(skill => (
-					<SkillCard skill={skill}/>
-				))
-			}
+			{/* show saved skill */}
+			<FlatList
+				data={mySkills}
+				keyExtractor={item => item}
+				renderItem={({ item }) => (
+					<SkillCard skill={item}/>
+				)}
+			/>
 
 		</View>
 	)
@@ -68,7 +71,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#1F1e25',
 		color: '#fff',
 		fontSize: 18,
-		padding: Platform.OS === 'ios' ? 15 : 10, // faz a adapitação caso seja ios ou android
+		padding: Platform.OS === 'ios' ? 15 : 10, // adapt between iOS or Android
 		marginTop: 30,
 		borderRadius: 9
 	}
