@@ -10,27 +10,36 @@ import {
 import { Button } from '../components/Button';
 import { SkillCard } from '../components/SkillCard';
 
+interface SkillData {
+	id: String;
+	name: String;
+}
+
 export function Home() {
 	// store an empty state and reload when start app in state initial
 	const [newSkill, setNewSkill] = useState('');
-	const [mySkills, setMySkills] = useState([]);
+	const [mySkills, setMySkills] = useState<SkillData[]>([]);
 	const [greeting, setGreeting] = useState('');
 
 
 	// Hooks
 	function handleAddNewSkill() {
 		// adds a new skill keeping the old ones creating a new vector
-		setMySkills(oldState => [...oldState, newSkill]);
+		const data = {
+			id: String(new Date().getTime()),
+			name: newSkill
+		}
+		setMySkills(oldState => [...oldState, data]);
 	}
 
 	useEffect(() => {
 		//effect observed when variable `[]` is changed
 		const currentHours = new Date().getHours();
 
-		if(currentHours < 12) {
+		if (currentHours < 12) {
 			setGreeting('Good Morning');
 		}
-		else if(currentHours >= 12 && currentHours < 18) {
+		else if (currentHours >= 12 && currentHours < 18) {
 			setGreeting('Good Afternoon');
 		}
 		else {
@@ -46,7 +55,7 @@ export function Home() {
 			</Text>
 
 			<Text style={styles.greetings}>
-				{ greeting }
+				{greeting}
 			</Text>
 
 			<TextInput
@@ -56,8 +65,11 @@ export function Home() {
 				onChangeText={setNewSkill}
 			/>
 
-			 {/* add skill */}
-			<Button onPress={handleAddNewSkill} />
+			{/* add skill */}
+			<Button
+				title="Add"
+				onPress={handleAddNewSkill}
+			/>
 
 			{/* space of skils */}
 			<Text style={[styles.title, { marginVertical: 50 }]}>
@@ -67,9 +79,9 @@ export function Home() {
 			{/* show saved skill */}
 			<FlatList
 				data={mySkills}
-				keyExtractor={item => item}
+				keyExtractor={item => item.id}
 				renderItem={({ item }) => (
-					<SkillCard skill={item}/>
+					<SkillCard skill={item.name} />
 				)}
 			/>
 
