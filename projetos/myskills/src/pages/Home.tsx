@@ -22,7 +22,6 @@ export function Home() {
 	const [greeting, setGreeting] = useState('');
 
 
-	// Hooks
 	function handleAddNewSkill() {
 		// adds a new skill keeping the old ones creating a new vector
 		const data = {
@@ -32,6 +31,14 @@ export function Home() {
 		setMySkills(oldState => [...oldState, data]);
 	}
 
+	// remove skill
+	function handleRemoveSkill(id: string) {
+		setMySkills(oldState => oldState.filter(
+			skill => skill.id !== id
+		));
+	}
+
+	// Hooks
 	useEffect(() => {
 		//effect observed when variable `[]` is changed
 		const currentHours = new Date().getHours();
@@ -71,7 +78,7 @@ export function Home() {
 				onPress={handleAddNewSkill}
 			/>
 
-			{/* space of skils */}
+			{/* space of skills */}
 			<Text style={[styles.title, { marginVertical: 50 }]}>
 				My skills
 			</Text>
@@ -81,7 +88,10 @@ export function Home() {
 				data={mySkills}
 				keyExtractor={item => item.id}
 				renderItem={({ item }) => (
-					<SkillCard skill={item.name} />
+					<SkillCard
+						skill={item.name}
+						onPress={() => handleRemoveSkill(item.id)}
+					/>
 				)}
 			/>
 
@@ -93,7 +103,6 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#121015',
-		paddingHorizontal: 20,
 		paddingVertical: 70,
 		paddingHorizontal: 30
 	},
