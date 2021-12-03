@@ -16,6 +16,7 @@ interface SkillData {
 }
 
 export function Home() {
+
 	// store an empty state and reload when start app in state initial
 	const [newSkill, setNewSkill] = useState('');
 	const [mySkills, setMySkills] = useState<SkillData[]>([]);
