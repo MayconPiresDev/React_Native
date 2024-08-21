@@ -24,6 +24,7 @@
     "react-hook-form": "^7.52.2",
     "react-router-dom": "^6.26.1",
     "sonnar": "^1.0.0",
+    "sonner": "^1.5.0",
     "sort-by": "^1.2.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
